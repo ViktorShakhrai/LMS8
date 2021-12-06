@@ -17,21 +17,27 @@
 
 
 def make_operation(symbol_operation, *args):
-    if symbol_operation == "+":
-        rez = sum(args)
+    digit_list = []
+    for i in args:
+        digit_list.append(i)
+
+    if symbol_operation == "+" and len(symbol_operation) != 0:
+        rez = digit_list.pop(0)
+        for i in digit_list:
+            rez += i
         return rez
-    elif symbol_operation == '-':
-        for i in args:
-            i -= i
-            return i
+    elif symbol_operation == '-' and len(symbol_operation) != 0:
+        rez = digit_list.pop(0)
+        for i in digit_list:
+            rez -= i
+        return rez
     else:
-        for i in args:
-            i *= i
-            return i
+        rez = digit_list.pop(0)
+        for i in digit_list:
+            rez *= i
+        return rez
 
 
-sym = input("Enter operation symbol: ")
-numbers =  input("Enter numbers: ").strip().split(',')
-int_num = map(int, numbers)
-print(int_num)
-# print(make_operation(sym, *numbers))
+assert make_operation("+", 7, 7, 2) == 16
+assert make_operation("-", 5, 5, -10, -20) == 30
+assert make_operation("*", 7, 6) == 42
